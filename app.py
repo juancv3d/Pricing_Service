@@ -7,3 +7,6 @@ QUERY = {'class': 'price-main-md'}
 
 imac = Item(URL, TAG_NAME, QUERY)
 imac.save_to_database()
+
+items_loaded = Item.all()
+print(items_loaded[0].get_price())
