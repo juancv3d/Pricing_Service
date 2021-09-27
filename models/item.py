@@ -1,7 +1,7 @@
 from typing import Dict
 import re
 import requests
-import uuid
+from uuid import uuid4
 from bs4 import BeautifulSoup
 from common.database import Database
 
@@ -13,10 +13,27 @@ class Item:
         self.query = query
         self.price = None
         self.collection = 'items'
-        self._id = _id or uuid.uuid4().hex
+        self._id = _id or uuid4().hex
 
     def __repr__(self):
+        """
+        returns the object in a string format.
+        """
         return f'<Item {self.url}>'
+
+    def convert_data_to_json(self):
+        """
+        Converts the data to a json format.
+
+        Returns:
+            json (dict): The data in json format.
+        """
+        return {
+            '_id': self._id,
+            'url': self.url,
+            'tag': self.tag,
+            'query': self.query
+        }
 
     def get_price(self):
         """
@@ -41,16 +58,12 @@ class Item:
         """
         Database.insert(self.collection, self.convert_data_to_json())
 
-    def convert_data_to_json(self):
+    @classmethod
+    def all(cls):
         """
-        Converts the data to a json format.
+        Returns all the items from the database.
 
         Returns:
-            json (dict): The data in json format.
+            items (list): All the items from the database.
         """
-        return {
-            '_id': self._id,
-            'url': self.url,
-            'tag': self.tag,
-            'query': self.query
-        }
+        return [cls(**item) for item in Database.find('items', {})]
