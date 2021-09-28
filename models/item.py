@@ -59,6 +59,13 @@ class Item:
         Database.insert(self.collection, self.convert_data_to_json())
 
     @classmethod
+    def get_by_id(cls, _id):
+        """
+        Gets the item by id.
+        """
+        return cls(**Database.find_one('items', {'_id': id}))
+
+    @classmethod
     def all(cls):
         """
         Returns all the items from the database.
