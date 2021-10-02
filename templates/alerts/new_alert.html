@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}New alert{% endblock %}
+{% block content %}
+<header>
+    <h1>New Alert</h1>
+</header>
+<section class="create_item_content">
+    <form method="post">
+        <div class="form-group">
+            <label for="alert_id">Alert id</label>
+            <input type"text" class="form-control" id="alert_id" name="id" placeholder="Enter alert id"/>
+        </div>
+        <div class="form-group">
+            <label for="price_limit">Price Limit</label> 
+            <input type="text" class="form-control" id="price_limit"name="query" placeholder='30000' aria-describedby="priceLimitHelp"/>
+            <small id="priceLimitHelp" class="form-text text-muted">The price limit of the product</small>
+        </div>
+        <button type="submit" class="btn btn-primary">Create alert</button>
+    </form>
+</section>
+
+{% endblock %}
