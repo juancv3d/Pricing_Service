@@ -62,8 +62,9 @@ class Item:
     def get_by_id(cls, _id):
         """
         Gets the item by id.
+
         """
-        return cls(**Database.find_one('items', {'_id': id}))
+        return cls(**Database.find_one('items', {'_id': id}))  # ** converts the dict to keyword arguments
 
     @classmethod
     def all(cls):
