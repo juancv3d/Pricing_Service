@@ -1,6 +1,6 @@
 from abc import ABCMeta, abstractmethod
 from re import T
-from typing import List, TypeVar, Type
+from typing import List, TypeVar, Type, Union, Dict
 from common.database import Database
 
 T = TypeVar('T', bound='Model')
@@ -45,7 +45,7 @@ class Model(metaclass=ABCMeta):
         return cls(**data_from_db)
 
     @classmethod
-    def find_one_by(cls: Type[T], attribute: str, value: str) -> T:
+    def find_one_by(cls: Type[T], attribute: str, value: Union[str, Dict]) -> T:
         """
         Returns the item from the database by attribute.
         """
